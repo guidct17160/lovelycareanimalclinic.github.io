@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>บริการขูดหินปูนสัตว์เลี้ยง</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Font Mitr (ตามที่คุณเคยใช้) -->
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- โหลด Font Awesome (สำหรับไอคอน) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #e8f9ea !important;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+            /* เส้นเน้นส่วนหัว */
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #70e07e;
+            color: #fff;
+        }
+
+        /* ---------- Body ---------- */
+        .body-section {
+            padding: 50px 50px;
+        }
+
+        .body-section h2 {
+            color: rgb(132, 247, 138);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .images-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .images-row .image-card {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-row img {
+            border-radius: 25px;
+            height: 400px;
+            width: 400px;
+            object-fit: cover;
+        }
+
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="text-gray-700">
+
+    <header class="header">
+        <div class="logo-contact">
+            <img src="picture/LOGO.png" alt="Logo">
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- 1. Hero Section (Before/After) -->
+        <section class="bg-white py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-teal-700 leading-tight">
+                        ยิ้มสดใส สุขภาพดี
+                    </h1>
+                    <p class="text-xl text-gray-600 mt-4 mb-8">
+                        การขูดหินปูน ไม่ใช่แค่เรื่องความสวยงาม แต่คือการป้องกันโรคร้ายในช่องปาก, หัวใจ, และไต
+                        ที่เกิดจากการสะสมของแบคทีเรีย
+                    </p>
+                    <a href="#booking"
+                        class="cta-button w-full md:w-auto bg-teal-500 text-white font-bold text-xl px-10 py-4 rounded-xl shadow-lg hover:bg-teal-600">
+                        <i class="fa-solid fa-calendar-check mr-2"></i>
+                        นัดหมายตรวจสุขภาพฟัน
+                    </a>
+                </div>
+                <!-- Image Placeholder (Before/After) -->
+                <div class="hidden md:block">
+                    <img src="picture/smile.png"
+                        alt="Before and After Pet Dental Scaling"
+                        class="rounded-2xl shadow-2xl object-cover w-full h-auto border-4 border-white">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. "Why?" Section (Warning Signs) -->
+        <section id="why" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+                    <i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-2"></i>
+                    สัญญาณเตือน! ถึงเวลาต้องขูดหินปูน
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Sign 1: Bad Breath -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-500 text-center">
+                        <i class="fa-solid fa-smog text-5xl text-teal-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">กลิ่นปากรุนแรง</h3>
+                        <p class="text-gray-600">กลิ่นปากไม่ใช่เรื่องปกติ แต่เป็นสัญญาณของการติดเชื้อและแบคทีเรียสะสม
+                        </p>
+                    </div>
+                    <!-- Sign 2: Plaque -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-500 text-center">
+                        <i class="fa-solid fa-shield-virus text-5xl text-teal-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">คราบหินปูนสีเหลือง/น้ำตาล</h3>
+                        <p class="text-gray-600">คราบแข็งที่เกาะตามซอกฟัน คือแหล่งเพาะพันธุ์เชื้อโรคชั้นดี</p>
+                    </div>
+                    <!-- Sign 3: Gingivitis -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-teal-500 text-center">
+                        <i class="fa-solid fa-bacteria text-5xl text-teal-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">เหงือกอักเสบ/เลือดออก</h3>
+                        <p class="text-gray-600">เหงือกบวมแดง หรือมีเลือดออกเวลากินอาหาร บ่งชี้ถึงการอักเสบ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. "How?" Section (The Process) -->
+        <section id="process" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">ขั้นตอนการขูดหินปูนที่ปลอดภัย</h2>
+                <p class="text-center text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+                    เราให้ความสำคัญสูงสุดกับความปลอดภัย การขูดหินปูนทุกเคสจะอยู่ภายใต้การดูแลของสัตวแพทย์อย่างใกล้ชิด
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-center">
+                    <!-- Step 1 -->
+                    <div class="p-4">
+                        <div
+                            class="w-16 h-16 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow-lg">
+                            1</div>
+                        <h4 class="font-semibold mb-1">ตรวจสุขภาพและตรวจเลือด</h4>
+                        <p class="text-sm text-gray-500">ประเมินความพร้อมของร่างกาย (ตับ, ไต) ก่อนการวางยาสลบ</H4>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="p-4">
+                        <div
+                            class="w-16 h-16 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow-lg">
+                            2</div>
+                        <h4 class="font-semibold mb-1">วางยาสลบ (แบบดม)</h4>
+                        <p class="text-sm text-gray-500">ใช้วิธีดมยาสลบที่ปลอดภัย และมีเครื่องมอนิเตอร์สัญญาณชีพ (HR,
+                            SpO2, BP) ตลอดเวลา</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="p-4">
+                        <div
+                            class="w-16 h-16 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow-lg">
+                            3</div>
+                        <h4 class="font-semibold mb-1">ขูดหินปูน (Scaling)</h4>
+                        <p class="text-sm text-gray-500">ใช้เครื่องขูดหินปูนระบบ Ultrasonic
+                            ขจัดคราบหินปูนทั้งเหนือและใต้เหงือก</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="p-4">
+                        <div
+                            class="w-16 h-16 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow-lg">
+                            4</div>
+                        <h4 class="font-semibold mb-1">ขัดฟัน (Polishing)</h4>
+                        <p class="text-sm text-gray-500">ขัดผิวฟันให้เรียบ เพื่อลดการกลับมาเกาะใหม่ของคราบแบคทีเรีย</p>
+                    </div>
+                    <!-- Step 5 -->
+                    <div class="p-4">
+                        <div
+                            class="w-16 h-16 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-3 shadow-lg">
+                            5</div>
+                        <h4 class="font-semibold mb-1">พักฟื้นและติดตามอาการ</h4>
+                        <p class="text-sm text-gray-500">เฝ้าดูอาการจนกว่าสัตว์เลี้ยงจะฟื้นตัวเต็มที่
+                            ปลอดภัยก่อนกลับบ้าน</g4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Pricing Section -->
+        <section id="pricing" class="py-16">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">แพ็กเกจขูดหินปูน (รวมค่าใช้จ่าย)</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Cat Package -->
+                    <div class="bg-white p-6 rounded-xl shadow-xl border-2 border-gray-100 flex flex-col">
+                        <h3 class="text-2xl font-bold text-teal-600 text-center mb-4">สำหรับแมว 🐱</h3>
+                        <p class="text-center text-4xl font-extrabold text-gray-800 mb-4">2,500 <span
+                                class="text-base font-normal text-gray-500">บาท</span></p>
+                        <ul class="space-y-2 text-gray-600 mb-6 flex-grow">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>ตรวจเลือด
+                                (CBC, Chem)</li>
+                            <li class="flex items-center"><i
+                                    class="fa-solid fa-check text-green-500 mr-2"></i>วางยาสลบแบบดม</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>ขูดหินปูน
+                                + ขัดฟัน</li>
+                            <li class="flex items-center"><i
+                                    class="fa-solid fa-check text-green-500 mr-2"></i>ค่ายาและเวชภัณฑ์</li>
+                        </ul>
+                        <a href="#booking"
+                            class="cta-button w-full text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300">นัดคิวแมว</a>
+                    </div>
+
+                    <!-- Small Dog Package (Recommended) -->
+                    <div class="bg-teal-700 text-white p-8 rounded-2xl shadow-2xl flex flex-col transform scale-105">
+                        <h3 class="text-2xl font-bold text-yellow-300 text-center mb-4">สุนัขเล็ก (0-10 กก.) 🐶</h3>
+                        <p class="text-center text-4xl font-extrabold mb-4">3,500 <span
+                                class="text-base font-normal text-gray-200">บาท</span></p>
+                        <ul class="space-y-2 mb-6 flex-grow">
+                            <li class="flex items-center"><i
+                                    class="fa-solid fa-check text-yellow-300 mr-2"></i>ตรวจเลือด (CBC, Chem)</li>
+                            <li class="flex items-center"><i
+                                    class="fa-solid fa-check text-yellow-300 mr-2"></i>วางยาสลบแบบดม</li>
+                            <li class="flex items-center"><i
+                                    class="fa-solid fa-check text-yellow-300 mr-2"></i>ขูดหินปูน + ขัดฟัน</li>
+                            <li class="flex items-center"><i
+                                    class="fa-solid fa-check text-yellow-300 mr-2"></i>ค่ายาและเวชภัณฑ์</li>
+                        </ul>
+                        <a href="#booking"
+                            class="cta-button w-full text-center bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg font-bold hover:bg-yellow-500">นัดคิวสุนัขเล็ก</a>
+                    </div>
+
+                    <!-- Large Dog Package -->
+                    <div class="bg-white p-6 rounded-xl shadow-xl border-2 border-gray-100 flex flex-col">
+                        <h3 class="text-2xl font-bold text-teal-600 text-center mb-4">สุนัขใหญ่ (10+ กก.) 🐕</h3>
+                        <p class="text-center text-4xl font-extrabold text-gray-800 mb-4">4,500+ <span
+                                class="text-base font-normal text-gray-500">บาท</span></p>
+                        <ul class="space-y-2 text-gray-600 mb-6 flex-grow">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>ตรวจเลือด
+                                (CBC, Chem)</li>
+                            <li class="flex items-center"><i
+                                    class="fa-solid fa-check text-green-500 mr-2"></i>วางยาสลบแบบดม</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>ขูดหินปูน
+                                + ขัดฟัน</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i>ค่ายา
+                                (คิดตามน้ำหนัก)</li>
+                        </ul>
+                        <a href="#booking"
+                            class="cta-button w-full text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300">นัดคิวสุนัขใหญ่</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Booking Form Section -->
+        <section id="booking" class="py-20 bg-white">
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">แบบฟอร์มนัดหมายออนไลน์</h2>
+                <form class="space-y-5 bg-gray-50 p-8 rounded-xl shadow-inner border border-gray-200">
+                    <div>
+                        <label for="ownerName" class="block text-sm font-medium text-gray-700">ชื่อเจ้าของ</label>
+                        <input type="text" id="ownerName"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-teal-500 focus:ring-teal-500"
+                            placeholder="สมชาย รักสัตว์">
+                    </div>
+                    <div>
+                        <label for="petName" class="block text-sm font-medium text-gray-700">ชื่อสัตว์เลี้ยง</label>
+                        <input type="text" id="petName"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-teal-500 focus:ring-teal-500"
+                            placeholder="เจ้าเหมียว">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">เบอร์โทรติดต่อ</label>
+                        <input type="tel" id="phone"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-teal-500 focus:ring-teal-500"
+                            placeholder="08X-XXX-XXXX">
+                    </div>
+                    <div>
+                        <label for="date" class="block text-sm font-medium text-gray-700">วันที่สะดวก
+                            (โดยประมาณ)</label>
+                        <input type="date" id="date"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 focus:border-teal-500 focus:ring-teal-500">
+                    </div>
+                    <button type="submit"
+                        class="cta-button w-full bg-teal-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-teal-600">
+                        ส่งข้อมูลนัดหมาย
+                    </button>
+                    
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; Lovely Care Animal Clinic by (Guichai)</p>
+        </div>
+    </footer>
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+    
+
+</body>
+
+</html></ul></div></p></div>

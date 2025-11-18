@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกี่ยวกับเรา | Lovely Care Animal Clinic</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Font Mitr -->
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+            /* เส้นเน้นส่วนหัว */
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #70e07e;
+            color: #fff;
+        }
+
+        /* ---------- Body ---------- */
+        .body-section {
+            padding: 50px 50px;
+        }
+
+        .body-section h2 {
+            color: rgb(132, 247, 138);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .images-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .images-row .image-card {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-row img {
+            border-radius: 25px;
+            height: 400px;
+            width: 400px;
+            object-fit: cover;
+        }
+
+        body {
+            font-family: 'Mitr', sans-serif;
+            background-color: #f8fafc;
+            /* Slate-50 */
+            color: #334155;
+            /* Slate-700 */
+        }
+
+        .hero-pattern {
+            background-color: #059669;
+            /* Emerald-600 */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Animation เล็กน้อยสำหรับรูปภาพ */
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-contact">
+            <img src="picture/LOGO.png" alt="Logo">
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <header class="hero-pattern text-white py-16 md:py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
+                ดูแลด้วยใจ <span class="text-emerald-200">ห่วงใยดั่งครอบครัว</span>
+            </h1>
+            <p class="text-lg md:text-xl text-emerald-50 max-w-2xl mx-auto font-light">
+                Lovely Care Animal Clinic มุ่งมั่นมอบบริการทางการแพทย์ที่ดีที่สุด
+                เพื่อให้สัตว์เลี้ยงของคุณมีความสุขและสุขภาพแข็งแรง
+            </p>
+        </div>
+        <!-- Decorative Circle -->
+        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl"></div>
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-yellow-300 opacity-20 rounded-full blur-3xl">
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
+
+        <!-- Story Section (Our Story) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Image Side -->
+            <div class="relative order-2 lg:order-1">
+                <div class="absolute -inset-4 bg-emerald-200 rounded-2xl transform -rotate-2 opacity-50"></div>
+                <img src="picture/clinic.jpg" alt="บรรยากาศคลินิก"
+                    class="relative rounded-2xl shadow-xl w-full h-auto object-cover hover-scale border-4 border-white">
+                <!-- Badge -->
+                <div
+                    class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg flex items-center gap-3 border-l-4 border-emerald-500">
+                    <div class="bg-emerald-100 p-2 rounded-full text-emerald-600">
+                        <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500">ความไว้วางใจ</p>
+                        <p class="font-bold text-gray-800">มากกว่า 10 ปี</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Side -->
+            <div class="order-1 lg:order-2">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 relative inline-block">
+                    เรื่องราวของเรา
+                    <span class="absolute bottom-0 left-0 w-1/2 h-1 bg-emerald-500 rounded-full"></span>
+                </h2>
+                <div class="space-y-4 text-gray-600 text-lg leading-relaxed">
+                    <p>
+                        <span class="font-semibold text-emerald-700">Lovely Care Animal Clinic</span>
+                        ก่อตั้งขึ้นจากความเชื่อมั่นที่ว่า
+                        สัตว์เลี้ยงทุกตัวสมควรได้รับการดูแลสุขภาพในมาตรฐานสูงสุด
+                        ควบคู่ไปกับความรักและความเข้าใจอย่างลึกซึ้ง
+                    </p>
+                    <p>
+                        สำหรับเรา สัตว์เลี้ยงของคุณไม่ใช่แค่ 'คนไข้' แต่คือ <span
+                            class="italic text-emerald-600 font-medium">"สมาชิกในครอบครัว"</span>
+                        เราจึงมุ่งมั่นที่จะมอบการดูแลแบบองค์รวม ตั้งแต่การวินิจฉัยที่แม่นยำ
+                        ไปจนถึงสภาพแวดล้อมที่อบอุ่นและปราศจากความเครียดตลอดการเข้าใช้บริการ
+                    </p>
+                </div>
+
+                <div class="mt-8 flex gap-6 text-sm text-gray-500">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-emerald-500"></i>
+                        <span>เปิดทำการ 09:30 - 19:00</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="calendar-x" class="w-5 h-5 text-red-500"></i>
+                        <span>หยุดทุกวันอาทิตย์</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values Section (3 Factors) -->
+        <section>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">3 ปัจจัยหลักที่เรายึดมั่น</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">
+                    เราให้ความสำคัญกับทุกรายละเอียดเพื่อคุณภาพชีวิตที่ดีที่สุดของสัตว์เลี้ยง</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition duration-300 hover:-translate-y-2 group">
+                    <div
+                        class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
+                        <i data-lucide="stethoscope" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">มาตรฐานการแพทย์ที่แม่นยำ</h3>
+                    <p class="text-gray-600">ใช้อุปกรณ์วินิจฉัยที่ทันสมัย
+                        พร้อมแผนการรักษาที่ปรับเฉพาะสำหรับสัตว์เลี้ยงแต่ละตัว เพื่อผลลัพธ์ที่ดีที่สุด</p>
+                </div>
+
+                <!-- Value 2 -->
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition duration-300 hover:-translate-y-2 group">
+                    <div
+                        class="w-16 h-16 bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-pink-500 group-hover:text-white transition duration-300">
+                        <i data-lucide="heart" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">การสัมผัสที่อ่อนโยน</h3>
+                    <p class="text-gray-600">ทีมงานใช้เทคนิค Low-Stress Handling ช่วยให้สัตว์เลี้ยงผ่อนคลาย ไม่กลัวหมอ
+                        และมีความสุขตลอดการรักษา</p>
+                </div>
+
+                <!-- Value 3 -->
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition duration-300 hover:-translate-y-2 group">
+                    <div
+                        class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition duration-300">
+                        <i data-lucide="message-circle" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">การสื่อสารที่โปร่งใส</h3>
+                    <p class="text-gray-600">อธิบายอาการ วิธีรักษา และค่าใช้จ่ายอย่างชัดเจน ตรงไปตรงมา
+                        ให้เจ้าของมีส่วนร่วมในการตัดสินใจเสมอ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="bg-emerald-50 rounded-3xl p-8 md:p-16 relative overflow-hidden">
+            <!-- Decor -->
+            <div
+                class="absolute top-0 left-0 w-32 h-32 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob">
+            </div>
+            <div
+                class="absolute bottom-0 right-0 w-32 h-32 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000">
+            </div>
+
+            <div class="relative z-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">ทีมสัตวแพทย์ผู้เชี่ยวชาญ</h2>
+                    <p class="text-gray-600">มากประสบการณ์ อ่อนโยน ใส่ใจทุกชีวิตที่เข้ามารักษา</p>
+                </div>
+
+                <!-- Doctor Card (Centered) -->
+                <div class="flex justify-center">
+                    <div
+                        class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row hover:shadow-2xl transition duration-300">
+                        <!-- Doctor Image -->
+                        <div class="md:w-1/3 rounded-2xl overflow-hidden shadow-md bg-white p-4 relative">
+                            <div class="w-full aspect-[3/4] rounded-xl overflow-hidden">
+                                <img src="picture/Profile.jpg" alt="สพ.ญ. มัลลิกา โถทอง"
+                                    class="w-full h-full object-cover">
+                            </div>
+
+                            <!-- Gradient for mobile -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent md:hidden"></div>
+
+                            <!-- Name for mobile -->
+                            <div class="absolute bottom-4 left-4 text-white md:hidden">
+                                <p class="font-bold text-base">สพ.ญ. มัลลิกา โถทอง</p>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <!-- Doctor Info -->
+                        <div class="p-8 md:w-3/5 flex flex-col justify-center">
+                            <div class="mb-4 hidden md:block">
+                                <h3 class="text-2xl font-bold text-gray-800">สัตวแพทย์หญิง มัลลิกา โถทอง</h3>
+                                <p class="text-emerald-600 font-medium">สัตวแพทย์เวชศาสตร์ทั่วไป / ความชำนาญด้านผ่าตัด
+                                </p>
+                            </div>
+
+                            <div class="space-y-4 text-gray-600">
+                                <p>
+                                    "หมอเชื่อว่าการรักษาที่ดีที่สุด เริ่มต้นจากการรับฟังและการเข้าใจ
+                                    ทั้งตัวสัตว์เลี้ยงและเจ้าของ
+                                    หมอตั้งใจให้ทุกเคสได้รับการดูแลเหมือนกับที่หมอดูแลสัตว์เลี้ยงของหมอเอง"
+                                </p>
+                                <ul class="space-y-2 mt-4">
+                                    <li class="flex items-center gap-3">
+                                        <i data-lucide="award" class="text-yellow-500 w-5 h-5"></i>
+                                        <span>ประสบการณ์ทำงานกว่า 11 ปี</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <i data-lucide="shield-check" class="text-emerald-500 w-5 h-5"></i>
+                                        <span>ทักษะเฉพาะทางด้านศัลยกรรมผ่าตัด</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <i data-lucide="smile" class="text-blue-500 w-5 h-5"></i>
+                                        <span>เชี่ยวชาญด้านการรักษาสัตว์เลี้ยงทุกประเภท</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="bg-emerald-100 p-2 rounded-full">
+                            <img src="https://placehold.co/40x40/059669/ffffff?text=L" alt="Logo"
+                                class="h-8 w-8 rounded-full">
+                        </div>
+                        <span class="font-bold text-xl text-gray-800">Lovely Care Animal Clinic</span>
+                    </div>
+                    <p class="text-gray-500 leading-relaxed max-w-sm">
+                        คลินิกรักษาสัตว์ที่ให้ความสำคัญกับความสุขและสุขภาพของสัตว์เลี้ยงเป็นอันดับหนึ่ง
+                        พร้อมดูแลด้วยความรักและมาตรฐานวิชาชีพ
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-4">เมนูลัด</h4>
+                    <ul class="space-y-2 text-gray-500">
+                        <li><a href="home.html" class="hover:text-emerald-600 transition">หน้าแรก</a></li>
+                        <li><a href="aboutme.html" class="hover:text-emerald-600 transition">เกี่ยวกับเรา</a></li>
+                        <li><a href="#" class="hover:text-emerald-600 transition">บริการ</a></li>
+                        <li><a href="contactme.html" class="hover:text-emerald-600 transition">ติดต่อเรา</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-4">ติดต่อเรา</h4>
+                    <ul class="space-y-3 text-gray-500">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-emerald-500 flex-shrink-0 mt-1"></i>
+                            <span>123 ถนนสัตวแพทย์พัฒนา แขวงบางกะปิ เขตห้วยขวาง กทม.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-emerald-500 flex-shrink-0"></i>
+                            <span>065 223 9444</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy;  Lovely Care Animal Clinic by (Guichai)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script เรียกใช้งาน Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+    
+</body>
+
+</html>

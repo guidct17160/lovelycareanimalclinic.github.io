@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            
+            /* เส้นเน้นส่วนหัว */
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #70e07e;
+            color: #fff;
+        }
+
+        /* ---------- Body ---------- */
+        .body-section {
+            padding: 50px 50px;
+        }
+
+        .body-section h2 {
+            color: rgb(132, 247, 138);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .images-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .images-row .image-card {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-row img {
+            border-radius: 25px;
+            height: 400px;
+            width: 400px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-contact">
+            <img src="picture/LOGO.png" alt="Logo">
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <section class="body-section">
+        <div class="images-row">
+            <div class="image-card">
+                <a href="takecare.html"><img src="C:/Users/guidt/Desktop/HTML CSS/Lovelycare/picture/Takecare.png"
+                        ></a>
+                <h3>รับฝากน้องแมว</h3>
+            </div>
+            <div class="image-card">
+                <a href="vaccine.html"><img src="C:/Users/guidt/Desktop/HTML CSS/Lovelycare/picture/วัคซีน.png" ></a>
+                <h3>ฉีดวัคซีน</h3>
+            </div>
+            <div class="image-card">
+                <a href="ster.html"><img src="C:/Users/guidt/Desktop/HTML CSS/Lovelycare/picture/ทำหมัน.png" ></a>
+                <h3>ทำหมัน</h3>
+            </div>
+        </div>
+    </section>
+    <section class="body-section">
+        <div class="images-row">
+            <div class="image-card">
+                <a href="surgery.html"><img src="picture/ผ่าตัด.png"
+                        ></a>
+                <h3>ผ่าตัด</h3>
+            </div>
+            <div class="image-card">
+                <a href="pethealth.html"><img src="picture/ตรวจสุขภาพ.png" ></a>
+                <h3>ตรวจสุขภาพ</h3>
+            </div>
+            <div class="image-card">
+                <a href="scrape.html"><img src="C:/Users/guidt/Desktop/HTML CSS/Lovelycare/picture/ขูดหินปูน.png" ></a>
+                <h3>ขูดหินปูน</h3>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+    
+
+</body>
+
+</html>

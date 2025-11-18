@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ศูนย์ศัลยกรรมสัตว์เลี้ยง | Vet Surgery Center</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Font Mitr -->
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            
+            /* เส้นเน้นส่วนหัว */
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #70e07e;
+            color: #fff;
+        }
+
+        /* ---------- Body ---------- */
+        .body-section {
+            padding: 50px 50px;
+        }
+
+        .body-section h2 {
+            color: rgb(132, 247, 138);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .images-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .images-row .image-card {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-row img {
+            border-radius: 25px;
+            height: 400px;
+            width: 400px;
+            object-fit: cover;
+        }
+    
+        body {
+            font-family: 'Mitr', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-contact">
+            <img src="picture/LOGO.png" alt="Logo">
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <div class="inline-block bg-blue-800 bg-opacity-50 px-3 py-1 rounded-full text-sm font-medium mb-4 border border-blue-400">
+                    มั่นใจได้ 100 %
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    ศัลยกรรมปลอดภัย <br>
+                    <span class="text-blue-400">ใส่ใจทุกชีวิต</span>
+                </h1>
+                <p class="text-lg text-blue-100 mb-8 max-w-lg">
+                    ศูนย์รับส่งต่อเคสผ่าตัดทางสัตวแพทย์ พร้อมทีมวิสัญญีแพทย์และเครื่องมือติดตามสัญญาณชีพที่ทันสมัยที่สุด เพื่อความปลอดภัยสูงสุดของสัตว์เลี้ยงคุณ
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#booking" class="px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-xl font-bold text-center shadow-lg transition transform hover:-translate-y-1">
+                        จองคิวผ่าตัดออนไลน์
+                    </a>
+                    <a href="#services" class="px-8 py-4 bg-transparent border border-white hover:bg-white hover:text-blue-900 rounded-xl font-bold text-center transition">
+                        ดูรายการผ่าตัด
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center relative">
+                <!-- Decorative elements -->
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+                <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 2s"></div>
+                
+                <!-- Image Placeholder -->
+                <img src="picture\sugblue.png" 
+                     alt="ห้องผ่าตัดสัตว์เลี้ยงที่ทันสมัย" 
+                     class="rounded-2xl shadow-2xl border-4 border-blue-400/30 relative z-10 w-full max-w-md transform rotate-2 hover:rotate-0 transition duration-500">
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">บริการศัลยกรรมของเรา</h2>
+                <p class="mt-4 text-gray-500">ครอบคลุมทุกความต้องการ ตั้งแต่ผ่าตัดเล็กไปจนถึงผ่าตัดใหญ่ที่ซับซ้อน</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 p-8 rounded-2xl hover:shadow-xl transition border border-slate-100 group">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i data-lucide="scissors" class="h-8 w-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">ทำหมันและเนื้อเยื่ออ่อน</h3>
+                    <p class="text-gray-600">ทำหมัน (แผลเล็ก), ผ่าตัดมดลูกอักเสบ, ผ่าตัดนิ่วในกระเพาะปัสสาวะ, ผ่าตัดก้อนเนื้อตามผิวหนัง</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-50 p-8 rounded-2xl hover:shadow-xl transition border border-slate-100 group">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i data-lucide="bone" class="h-8 w-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">ศัลยกรรมกระดูกและข้อ</h3>
+                    <p class="text-gray-600">แก้ไขกระดูกหัก (ใส่เฝือก/ผ่าตัดดามเหล็ก), ผ่าตัดข้อสะโพกเสื่อม, ผ่าตัดเอ็นไขว้หน้าหัวเข่าขาด (CCL)</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-50 p-8 rounded-2xl hover:shadow-xl transition border border-slate-100 group">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i data-lucide="heart-pulse" class="h-8 w-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-800">ผ่าตัดฉุกเฉิน 24 ชม.</h3>
+                    <p class="text-gray-600">ผ่าตัดคลอดฉุกเฉิน, กระเพาะบิด (GDV), ม้ามแตก, หรืออุบัติเหตุรุนแรงที่ต้องหยุดเลือดทันที</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section (Focus here) -->
+    <section id="booking" class="py-20 bg-slate-900 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#4f46e5 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <span class="text-blue-400 font-semibold tracking-wider uppercase text-sm">Booking Online</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">จองคิวผ่าตัด / ปรึกษาสัตวแพทย์</h2>
+                <p class="text-slate-400 mt-4">กรอกข้อมูลเบื้องต้นเพื่อให้เจ้าหน้าที่ประเมินความพร้อมและติดต่อกลับภายใน 1 ชั่วโมง</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <!-- Info Side -->
+                    <div class="bg-blue-600 p-8 md:w-1/3 text-white flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold mb-6">สิ่งที่ต้องเตรียม</h3>
+                            <ul class="space-y-4 text-blue-100 text-sm">
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle" class="h-5 w-5 mr-2 flex-shrink-0"></i>
+                                    <span>งดน้ำและอาหาร 8-12 ชม. ก่อนผ่าตัด</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle" class="h-5 w-5 mr-2 flex-shrink-0"></i>
+                                    <span>สมุดวัคซีนและประวัติเลือดเก่า (ถ้ามี)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle" class="h-5 w-5 mr-2 flex-shrink-0"></i>
+                                    <span>แจ้งโรคประจำตัวหรือยาที่กินอยู่</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-8">
+                            <p class="text-sm text-blue-200 mb-2">สอบถามเพิ่มเติมโทร</p>
+                            <p class="text-2xl font-bold flex items-center"><i data-lucide="phone" class="mr-2 h-5 w-5"></i> 065 223 9444</p>
+                        </div>
+                    </div>
+
+                    <!-- Form Side -->
+                    <div class="p-8 md:w-2/3 bg-white">
+                        <form class="space-y-6">
+                            <!-- Owner Info -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">ชื่อเจ้าของ</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" placeholder="ชื่อ-นามสกุล">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรศัพท์</label>
+                                    <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" placeholder="08x-xxxxxxx">
+                                </div>
+                            </div>
+
+                            <!-- Pet Info -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">ชื่อสัตว์เลี้ยง</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" placeholder="น้อง...">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">ประเภทสัตว์เลี้ยง</label>
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" placeholder="เช่น หมา, แมว">
+                                </div>
+                            </div>
+
+                            <!-- Surgery Details -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">ประเภทการผ่าตัดที่ต้องการ</label>
+                                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition form-select appearance-none bg-white">
+                                    <option value="" disabled selected>กรุณาเลือก...</option>
+                                    <option value="spay_neuter">ทำหมัน (Spay/Neuter)</option>
+                                    
+                                    <option value="tumor">ผ่าตัดก้อนเนื้อ (Tumor Removal)</option>
+                                    <option value="orthopedic">ศัลยกรรมกระดูก (Orthopedic)</option>
+                                    <option value="c_section">ผ่าคลอด (C-Section)</option>
+                                    <option value="other">อื่นๆ / ปรึกษาแพทย์ก่อน</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">วันที่สะดวก (โดยประมาณ)</label>
+                                <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="bloodwork" type="checkbox" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="bloodwork" class="font-medium text-gray-700">ต้องการตรวจเลือดก่อนผ่าตัด (แนะนำ)</label>
+                                    <p class="text-gray-500">เพื่อความปลอดภัยในการวางยาสลบ</p>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-slate-900 text-white font-bold py-3 rounded-lg hover:bg-slate-800 transition duration-300 shadow-lg flex justify-center items-center group">
+                                <span>ยืนยันการจองคิว</span>
+                                <i data-lucide="arrow-right" class="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-400 text-sm">&copy; Lovely Care Animal Clinic by (Guichai)</p>
+        </div>
+    </footer>
+
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+</body>
+</html>

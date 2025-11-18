@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฉีดวัคซีนปลอดถัย</title>
+    <!-- โหลด Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Font Awesome สำหรับไอคอน -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+            /* เส้นเน้นส่วนหัว */
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #88e094;
+            color: #fff;
+        }
+
+        /* ---------- Body ---------- */
+        .body-section {
+            padding: 50px 50px;
+        }
+
+        .body-section h2 {
+            color: rgb(132, 247, 138);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .images-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .images-row .image-card {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-row img {
+            border-radius: 25px;
+            height: 400px;
+            width: 400px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col antialiased">
+
+
+    <header class="header">
+        <div class="logo-contact">
+            <img src="C:/Users/guidt/Desktop/HTML CSS/Lovelycare/picture/LOGO.png" alt="Logo">
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return searchFunction()">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+    <!-- 2. ส่วนแนะนำ/ดึงดูดความสนใจ (Hero Section) -->
+    <section class="py-16 bg-teal-50 border-b-2 border-teal-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+
+            <!-- Text Content -->
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                    ปกป้องเพื่อนซี้สี่ขา <br class="hidden sm:inline">ด้วย <span
+                        class="text-teal-600">วัคซีนที่ครบถ้วน</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-lg mx-auto md:mx-0">
+                    การฉีดวัคซีนที่ปลอดภัยและสบายใจที่สุด ด้วยทีมสัตวแพทย์ผู้เชี่ยวชาญ และวัคซีนมาตรฐานระดับโลก
+                    เพื่อสุขภาพที่ดีของสัตว์เลี้ยงที่คุณรัก
+                </p>
+
+                <!-- ปุ่ม CTA ซ้ำ -->
+                <a href="#booking-section"
+                    class="cta-button inline-flex items-center justify-center w-full md:w-auto px-12 py-4 bg-pink-600 text-white font-extrabold text-xl rounded-xl shadow-xl shadow-pink-300 hover:bg-pink-700">
+                    <i class="fa-solid fa-calendar-check mr-3"></i>
+                    คลิกเพื่อนัดหมายการฉีดวัคซีน
+                </a>
+            </div>
+
+            <!-- ภาพประกอบ -->
+            <div class="hidden md:block">
+                <img src="C:/Users/guidt/Desktop/HTML CSS/Lovelycare/picture/vaccine.jpg"
+                    alt="สุนัขกำลังได้รับวัคซีนอย่างมีความสุข"
+                    class="rounded-2xl shadow-2xl w-full h-auto object-cover border-4 border-white">
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ข้อมูลบริการและทำไมต้องวัคซีน (Core Services & Education) -->
+    <section id="services" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">ความสำคัญของวัคซีน</h2>
+            <p class="text-xl text-center text-teal-600 mb-12">ปกป้องสัตว์เลี้ยงจากโรคอันตรายที่เรามองไม่เห็น</p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- A. ความสำคัญของการฉีดวัคซีน (Why Vaccinate) -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"><i
+                            class="fa-solid fa-shield-cat mr-3 text-teal-500"></i> ประโยชน์ของการฉีดวัคซีน</h3>
+                    <ul class="space-y-3 text-lg text-gray-600 list-disc list-inside">
+                        <li>**ป้องกันโรคติดต่อร้ายแรง:** เช่น พิษสุนัขบ้า, ไข้หัด, ลำไส้อักเสบ</li>
+                        <li>**ลดความรุนแรงของโรค:** แม้ป่วยก็จะมีอาการไม่หนักถึงชีวิต</li>
+                        <li>**สร้างภูมิคุ้มกันหมู่:** ปกป้องสัตว์เลี้ยงตัวอื่นๆ ในชุมชน</li>
+                        <li>**ข้อกำหนดทางกฎหมาย:** วัคซีนบางชนิดเป็นข้อบังคับตามกฎหมาย (เช่น พิษสุนัขบ้า)</li>
+                    </ul>
+                </div>
+
+                <!-- B. ประเภทวัคซีน (Vaccine Types) -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"><i
+                            class="fa-solid fa-pills mr-3 text-teal-500"></i> วัคซีนที่เราให้บริการ</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h4 class="font-bold text-lg text-pink-600">สำหรับสุนัข (Dogs)</h4>
+                            <p class="text-sm text-gray-600">วัคซีนรวม 5/7/8 โรค, วัคซีนพิษสุนัขบ้า,
+                                วัคซีนไข้หวัดใหญ่สุนัข, วัคซีน Leptospirosis</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <h4 class="font-bold text-lg text-pink-600">สำหรับแมว (Cats)</h4>
+                            <p class="text-sm text-gray-600">วัคซีนรวม 3/4 โรค (หวัด, หัด, ช่องท้องอักเสบ),
+                                วัคซีนพิษสุนัขบ้า, วัคซีนลิวคีเมีย</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ตารางวัคซีนที่แนะนำ (Vaccination Schedule Guide) -->
+    <section id="schedule" class="py-16 bg-teal-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-6">ตารางวัคซีนลูกสุนัขและลูกแมว (ที่แนะนำ)</h2>
+            <p class="text-center text-lg text-gray-600 mb-10">
+                โปรดปรึกษาสัตวแพทย์ของเราเพื่อตารางที่เหมาะกับสัตว์เลี้ยงของคุณที่สุด</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- ตารางสำหรับสุนัข -->
+                <div class="bg-white p-6 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-bold text-teal-600 mb-4 border-b pb-2"><i class="fa-solid fa-dog mr-2"></i>
+                        ตารางวัคซีนสำหรับสุนัข</h3>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase">ช่วงอายุ
+                                </th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase">ชนิดวัคซีน
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">6 สัปดาห์</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนรวม (เข็มที่ 1)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">9 สัปดาห์</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนรวม (เข็มที่ 2) + Leptospirosis</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">12 สัปดาห์</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนรวม (เข็มที่ 3) + พิษสุนัขบ้า (เข็มแรก)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">ทุก 1 ปี</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนกระตุ้นประจำปี</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-sm text-gray-500 mt-4 italic">**คำแนะนำ:** ควรถ่ายพยาธิก่อนการฉีดวัคซีนทุกครั้ง</p>
+                </div>
+
+                <!-- ตารางสำหรับแมว -->
+                <div class="bg-white p-6 rounded-xl shadow-xl">
+                    <h3 class="text-2xl font-bold text-teal-600 mb-4 border-b pb-2"><i class="fa-solid fa-cat mr-2"></i>
+                        ตารางวัคซีนสำหรับแมว</h3>
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase">ช่วงอายุ
+                                </th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase">ชนิดวัคซีน
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">8 สัปดาห์</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนรวม 3/4 โรค (เข็มที่ 1)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">12 สัปดาห์</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนรวม 3/4 โรค (เข็มที่ 2) + ลิวคีเมีย
+                                    (เข็มที่ 1)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">16 สัปดาห์</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนพิษสุนัขบ้า (เข็มแรก) + ลิวคีเมีย (เข็มที่
+                                    2)</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-2 whitespace-nowrap">ทุก 1 ปี</td>
+                                <td class="px-3 py-2 whitespace-nowrap">วัคซีนกระตุ้นประจำปี</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-sm text-gray-500 mt-4 italic">**คำแนะนำ:** ควรตรวจสุขภาพก่อนรับวัคซีน
+                        โดยเฉพาะแมวที่มีโอกาสสัมผัสกับไวรัสลิวคีเมีย</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. การจองและราคา (Booking & Pricing) -->
+    <section id="booking-section" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">นัดหมายและตรวจสอบแพ็กเกจราคา</h2>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Pricing / Package -->
+                <div id="pricing" class="bg-teal-50 p-8 rounded-2xl shadow-xl border-t-4 border-teal-500">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">แพ็กเกจวัคซีนสุดคุ้ม</h3>
+                    <ul class="space-y-4 text-gray-700">
+                        <li class="flex justify-between items-center border-b pb-2">
+                            <span class="font-medium flex items-center"><i
+                                    class="fa-solid fa-paw mr-2 text-pink-500"></i> แพ็กเกจลูกสัตว์ (3 เข็มรวม)</span>
+                            <span class="font-bold text-xl text-teal-600">฿ 1,800</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b pb-2">
+                            <span class="font-medium flex items-center"><i
+                                    class="fa-solid fa-heart-pulse mr-2 text-pink-500"></i> วัคซีนพิษสุนัขบ้า
+                                (รายปี)</span>
+                            <span class="font-bold text-xl text-teal-600">฿ 250</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-2">
+                            <span class="font-medium flex items-center"><i
+                                    class="fa-solid fa-shield-virus mr-2 text-pink-500"></i> วัคซีนกระตุ้นประจำปี
+                                (รวม)</span>
+                            <span class="font-bold text-xl text-teal-600">฿ 950</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-teal-100 text-teal-800 rounded-lg">
+                        <i class="fa-solid fa-tag mr-2"></i> **โปรโมชั่นพิเศษ:** รับส่วนลด 10% เมื่อนัดหมายออนไลน์!
+                    </div>
+                </div>
+
+                <!-- Booking Form Placeholder -->
+                <div class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">แบบฟอร์มนัดหมายออนไลน์</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label for="pet-name"
+                                class="block text-sm font-medium text-gray-700">ชื่อของสัตว์เลี้ยง:</label>
+                            <input type="text" id="pet-name" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+                        <div>
+                            <label for="ownerName" class="block text-sm font-medium text-gray-700">ชื่อเจ้าของ:</label>
+                            <input type="text" id="ownerName" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+                        <div>
+                            <label for="contact"
+                                class="block text-sm font-medium text-gray-700">เบอร์โทรศัพท์ติดต่อ:</label>
+                            <input type="tel" id="contact" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+                        <div>
+                            <label for="petType"
+                                class="block text-sm font-medium text-gray-700">ชนิดสัตว์เลี้ยง:</label>
+                            <select id="petType" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-teal-500 focus:ring-teal-500">
+                                <option value="">--- เลือก ---</option>
+                                <option value="dog">สุนัข</option>
+                                <option value="cat">แมว</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="appointmentDate"
+                                class="block text-sm font-medium text-gray-700">วันที่ต้องการนัดหมาย:</label>
+                            <input type="date" id="appointmentDate" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+                        <button type="submit"
+                            class="cta-button w-full bg-teal-500 text-white font-bold py-3 rounded-xl hover:bg-teal-600 shadow-md">
+                            ยืนยันการนัดหมาย
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <footer class="mt-10 text-center text-gray-400 text-sm border-t pt-4">
+            <p>&copy; Lovely Care Animal Clinic by (Guichai)</p>
+        </footer>
+    </section>
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+
+
+
+</body>
+
+</html>

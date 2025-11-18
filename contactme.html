@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดต่อเรา | Vet Surgery Center</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Font Mitr -->
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+            /* เส้นเน้นส่วนหัว */
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #70e07e;
+            color: #fff;
+        }
+
+        /* ---------- Body ---------- */
+        .body-section {
+            padding: 50px 50px;
+        }
+
+        .body-section h2 {
+            color: rgb(132, 247, 138);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .images-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .images-row .image-card {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-row img {
+            border-radius: 25px;
+            height: 400px;
+            width: 400px;
+            object-fit: cover;
+        }
+
+        body {
+            font-family: 'Mitr', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            background-color: #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* สร้าง Pattern พื้นหลังสำหรับ Hero Section */
+        .pattern-bg {
+            background-color: #1e3a8a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-contact">
+            <img src="picture/LOGO.png" alt="Logo">
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <!-- Hero Header -->
+    <div class="pattern-bg text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">ติดต่อเรา</h1>
+            <p class="text-blue-200 text-lg max-w-2xl mx-auto">
+                เราพร้อมดูแลและให้คำปรึกษาทุกปัญหาสุขภาพสัตว์เลี้ยงของคุณ
+                ด้วยทีมสัตวแพทย์ผู้เชี่ยวชาญและอุปกรณ์ที่ทันสมัย ตลอด 24 ชั่วโมง
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-20 relative z-10">
+
+        <!-- Info Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Phone / Emergency -->
+            <div
+                class="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-red-500 text-center transform hover:-translate-y-1 transition duration-300">
+                <div
+                    class="w-14 h-14 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="phone-call" class="h-7 w-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">ฉุกเฉิน 24 ชม.</h3>
+                <p class="text-gray-500 mb-4">สำหรับเคสเร่งด่วนและอุบัติเหตุ</p>
+                <a href="tel:029998888" class="text-2xl font-extrabold text-red-600 hover:text-red-700">065 223 9444</a>
+            </div>
+
+            <!-- Location -->
+            <div
+                class="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-blue-500 text-center transform hover:-translate-y-1 transition duration-300">
+                <div
+                    class="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="map-pin" class="h-7 w-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">ที่ตั้งคลินิก</h3>
+                <p class="text-gray-500">เลิฟลี่แคร์ สัตวแพทย์<br> Lovely Care Animal Clinic<br>195/92 อำเภอบ้านฉาง
+                    ระยอง 21130</p>
+            </div>
+
+            <!-- Line / Social -->
+            <div
+                class="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-green-500 text-center transform hover:-translate-y-1 transition duration-300">
+                <div
+                    class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="message-circle" class="h-7 w-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">LINE Official</h3>
+                <p class="text-gray-500 mb-4">ปรึกษาอาการเบื้องต้น</p>
+                <a href="#" class="text-xl font-bold text-green-600 hover:text-green-700">@LovelyCareAnimalClinic</a>
+            </div>
+        </div>
+        <!-- Operating Hours & Map Grid -->
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+            <!-- Operating Hours (ซ้าย) -->
+            <div class="bg-slate-800 text-white p-8 rounded-2xl shadow-md relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500 rounded-full opacity-20 blur-2xl">
+                </div>
+
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <i data-lucide="clock" class="h-6 w-6 mr-2 text-blue-400"></i> เวลาทำการ
+                </h3>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex justify-between border-b border-slate-700 pb-2">
+                        <span>แผนกฉุกเฉิน & สัตว์ป่วยใน</span>
+                        <span class="text-green-400 font-bold">เปิด 24 ชั่วโมง</span>
+                    </li>
+                    <li class="flex justify-between border-b border-slate-700 pb-2">
+                        <span>ตรวจสุขภาพ / ฉีดวัคซีน</span>
+                        <span>09:30 - 19:00 น.</span>
+                    </li>
+
+                    <li class="flex justify-between">
+                        <span>รับฝากน้องแมว</span>
+                        <span>09:30 - 19:00 น.</span>
+                    </li>
+                    <li class="flex justify-between border-b border-slate-700 pb-2">
+                        <span>แผนกผ่าตัด (นัดหมาย)</span>
+                        <span>11:00 - 18:00 น.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Map (ขวา) -->
+            <div class="bg-white p-2 rounded-2xl shadow-md">
+                <div class="map-container relative">
+
+                    <!-- Google Map ที่เลื่อน / ขยาย / ลาก ได้ -->
+                    <iframe width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.194785755089!2d101.0465056!3d12.7322749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102f365c980604f%3A0x3a460fe03d44036f!2z4LmA4Lil4Li04Lif4Lil4Li14LmI4LmB4LiE4Lij4LmM4Liq4Lix4LiV4Lin4LmB4Lie4LiX4Lii4LmM!5e0!3m2!1sth!2sth!4v1700000000000">
+                    </iframe>
+
+                    <!-- ปุ่มนำทาง -->
+                    <a href="https://www.google.com/maps/dir//12.7322749,101.0490805" class="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-lg 
+           text-sm font-bold text-blue-600 hover:bg-blue-50 flex items-center">
+                        <i data-lucide="navigation" class="h-4 w-4 mr-2"></i> นำทางด้วย Google Maps
+                    </a>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            &copy; Lovely Care Animal Clinic by (Guichai)
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+    
+</body>
+
+</html>

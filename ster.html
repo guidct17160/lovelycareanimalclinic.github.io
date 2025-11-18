@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ทำหมันปลอดภัย</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 50px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            
+            /* เส้นเน้นส่วนหัว */
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 80px;
+            width: 80px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #70e07e;
+            color: #fff;
+        }
+
+        /* ---------- Body ---------- */
+        .body-section {
+            padding: 50px 50px;
+        }
+
+        .body-section h2 {
+            color: rgb(132, 247, 138);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .images-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .images-row .image-card {
+            text-align: center;
+            background: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .images-row img {
+            border-radius: 25px;
+            height: 400px;
+            width: 400px;
+            object-fit: cover;
+        }
+        body {
+            font-family: 'Mitr', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .brand-color {
+            background-color: #4374f9;
+        }
+
+        .brand-text {
+            color: #1e3a8a;
+        }
+
+        .accent-color {
+            background-color: #3b82f6;
+        }
+
+        .accent-text {
+            color: #3b82f6;
+        }
+
+        .safety-color {
+            background-color: #059669;
+        }
+
+        .cta-button {
+            background-color: #f59e0b;
+            color: #1e3a8a;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-contact">
+            <img src="picture/LOGO.png" alt="Logo">
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return false;">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section id="hero" class="brand-color text-white py-16 text-center">
+            <div class="max-w-4xl mx-auto px-4">
+                <h1 class="text-4xl font-extrabold mb-4">ทำหมันปลอดภัย <span class="text-yellow-400">ภายใต้การดูแลของสัตวแพทย์</span></h1>
+                <p class="text-lg mb-6">เราให้ความสำคัญสูงสุดกับความปลอดภัยของสัตว์เลี้ยงคุณ ด้วยอุปกรณ์ที่ทันสมัยและการเฝ้าระวังสัญญาณชีพตลอดการผ่าตัด</p>
+                <a href="#booking" class="cta-button inline-flex items-center px-6 py-3 rounded-xl shadow-lg">
+                    <i data-lucide="calendar-plus" class="w-5 h-5 mr-2"></i>จองคิวผ่าตัด & ปรึกษาสัตวแพทย์
+                </a>
+            </div>
+        </section>
+
+        <!-- Benefits (kept short) -->
+        <section id="benefits" class="py-12 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-2xl text-center font-bold brand-text mb-8">ทำไมต้องทำหมัน? 3 ประโยชน์เพื่อชีวิตที่ดีขึ้น</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-5 rounded-lg shadow">
+                        <div class="bg-blue-500 text-white inline-flex items-center justify-center w-10 h-10 rounded-full mb-3">
+                            <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-semibold brand-text">ป้องกันโรคร้าย</h3>
+                        <p class="text-gray-600 text-sm">ลดความเสี่ยงมะเร็งเต้านม, Pyometra และปัญหาอื่นๆ</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-lg shadow">
+                        <div class="bg-blue-500 text-white inline-flex items-center justify-center w-10 h-10 rounded-full mb-3">
+                            <i data-lucide="paw-print" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-semibold brand-text">พฤติกรรมดีขึ้น</h3>
+                        <p class="text-gray-600 text-sm">ลดการหนีเที่ยว พ่นปัสสาวะ และพฤติกรรมก้าวร้าว</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-lg shadow">
+                        <div class="bg-blue-500 text-white inline-flex items-center justify-center w-10 h-10 rounded-full mb-3">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-semibold brand-text">ความปลอดภัยสูง</h3>
+                        <p class="text-gray-600 text-sm">ผ่าตัดแผลเล็ก ใช้ไหมละลาย และการจัดการความเจ็บปวด</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing / Packages -->
+        <section id="pricing" class="py-12 bg-white">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-2xl font-bold text-center brand-text mb-6">ราคาแพ็กเกจทำหมัน (รวมทุกอย่าง)</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Cat -->
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-lg flex flex-col">
+                        <i data-lucide="cat" class="w-8 h-8 accent-text mb-3"></i>
+                        <h3 class="text-xl font-bold brand-text">แพ็กเกจแมว</h3>
+                        <p class="text-gray-600 mb-4">ทุกสายพันธุ์</p>
+                        <div class="text-2xl font-extrabold accent-text mb-4">2,500 - 4,000 บาท</div>
+                        <ul class="text-sm text-gray-700 mb-6 space-y-2">
+                            <li>ค่าผ่าตัด & ยาสลบ</li>
+                            <li>ยาแก้ปวด & ยาปฏิชีวนะ</li>
+                            <li>ปลอกคอกันเลีย</li>
+                        </ul>
+                        <!-- book-btn with data-package -->
+                        <a href="#booking" class="book-btn bg-teal-600 text-white py-2 rounded-md text-center mt-auto"
+                           data-package="cat">จองคิวแมว</a>
+                    </div>
+
+                    <!-- Small dog -->
+                    <div class="bg-yellow-50 p-6 rounded-xl shadow-lg flex flex-col">
+                        <i data-lucide="dog" class="w-8 h-8 safety-color mb-3"></i>
+                        <h3 class="text-xl font-bold brand-text">แพ็กเกจสุนัขเล็ก</h3>
+                        <p class="text-gray-600 mb-4">น้ำหนัก &lt; 10 กก.</p>
+                        <div class="text-2xl font-extrabold safety-color mb-4">4,500 - 7,000 บาท</div>
+                        <ul class="text-sm text-gray-700 mb-6 space-y-2">
+                            <li>รวมตรวจเลือดพื้นฐานก่อนผ่าตัด</li>
+                            <li>ยาสลบพร้อมการเฝ้าระวัง</li>
+                            <li>ยาแก้ปวด & ปลอกคอ</li>
+                        </ul>
+                        <a href="#booking" class="book-btn bg-teal-600 text-white py-2 rounded-md text-center mt-auto"
+                           data-package="dog-small">จองคิวสุนัขเล็ก</a>
+                    </div>
+
+                    <!-- Large dog -->
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-lg flex flex-col">
+                        <i data-lucide="bone" class="w-8 h-8 accent-text mb-3"></i>
+                        <h3 class="text-xl font-bold brand-text">แพ็กเกจสุนัขใหญ่</h3>
+                        <p class="text-gray-600 mb-4">น้ำหนัก ≥ 10 กก.</p>
+                        <div class="text-2xl font-extrabold accent-text mb-4">7,500 - 12,000 บาท</div>
+                        <ul class="text-sm text-gray-700 mb-6 space-y-2">
+                            <li>ค่าผ่าตัด & ยาสลบ</li>
+                            <li>ยาแก้ปวด & ยาปฏิชีวนะ</li>
+                            <li>ปลอกคอกันเลีย</li>
+                        </ul>
+                        <a href="#booking" class="book-btn bg-teal-600 text-white py-2 rounded-md text-center mt-auto"
+                           data-package="dog-large">จองคิวสุนัขใหญ่</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking form (target id="booking") -->
+        <section id="booking" class="py-12 brand-color">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="bg-white/95 p-6 md:p-8 lg:p-10 rounded-2xl shadow-2xl border border-white/30">
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 text-center">แบบฟอร์มนัดหมายออนไลน์</h3>
+                    <p class="text-sm text-gray-600 text-center mb-6">กรอกข้อมูลด้านล่างเพื่อนัดหมายการผ่าตัด ทำหมัน และปรึกษาสัตวแพทย์</p>
+
+                    <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm" onsubmit="handleSubmit(event)">
+                        <!-- hidden field for package -->
+                        <input type="hidden" id="selectedPackage" name="selectedPackage" value="">
+
+                        <div>
+                            <label for="pet-name" class="block text-xs font-medium text-gray-700">ชื่อสัตว์เลี้ยง</label>
+                            <input type="text" id="pet-name" name="petName" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+
+                        <div>
+                            <label for="ownerName" class="block text-xs font-medium text-gray-700">ชื่อเจ้าของ</label>
+                            <input type="text" id="ownerName" name="ownerName" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+
+                        <div>
+                            <label for="contact" class="block text-xs font-medium text-gray-700">เบอร์โทรศัพท์ติดต่อ</label>
+                            <input type="tel" id="contact" name="contact" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+
+                        <div>
+                            <label for="petType" class="block text-xs font-medium text-gray-700">ชนิดสัตว์เลี้ยง</label>
+                            <select id="petType" name="petType" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-teal-500 focus:ring-teal-500">
+                                <option value="">--- เลือก ---</option>
+                                <option value="cat">แมว</option>
+                                <option value="dog-small">สุนัขเล็ก</option>
+                                <option value="dog-large">สุนัขใหญ่</option>
+                            </select>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="appointmentDate" class="block text-xs font-medium text-gray-700">วันที่ต้องการนัดหมาย</label>
+                            <input type="date" id="appointmentDate" name="appointmentDate" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-teal-500 focus:ring-teal-500">
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label for="notes" class="block text-xs font-medium text-gray-700">หมายเหตุ (เช่น น้ำหนัก, อายุ, ปัญหาสุขภาพ)</label>
+                            <textarea id="notes" name="notes" rows="3"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2 text-sm focus:border-teal-500 focus:ring-teal-500"></textarea>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <button type="submit"
+                                class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 rounded-lg text-sm shadow-md transition">
+                                ยืนยันการนัดหมาย
+                            </button>
+                        </div>
+                    </form>
+
+                    <p id="bookingNotice" class="mt-3 text-xs text-gray-600 hidden"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Credibility -->
+        <section id="trust" class="py-12 bg-gray-50">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-2xl font-bold text-center brand-text mb-6">ทีมงานและมาตรฐานความปลอดภัย</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold accent-text mb-2">สัตวแพทย์ผู้เชี่ยวชาญด้านศัลยกรรม</h3>
+                        <p class="text-gray-600 mb-4">ทีมของเรามีประสบการณ์สูงในการผ่าตัดทำหมันมากกว่า 1,000 เคส พร้อมเทคนิคการผ่าตัดแผลเล็ก</p>
+
+                        <ul class="space-y-3">
+                            <li class="flex items-start"><i data-lucide="check-circle" class="w-6 h-6 safety-color mr-3"></i><span class="brand-text font-semibold">เครื่องมือทันสมัย</span></li>
+                            <li class="flex items-start"><i data-lucide="check-circle" class="w-6 h-6 safety-color mr-3"></i><span class="brand-text font-semibold">ห้องผ่าตัดปลอดเชื้อ</span></li>
+                            <li class="flex items-start"><i data-lucide="check-circle" class="w-6 h-6 safety-color mr-3"></i><span class="brand-text font-semibold">การจัดการความเจ็บปวดครบถ้วน</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-200 h-48 rounded-xl shadow flex items-center justify-center">
+                        <p class="text-gray-500">ภาพห้องผ่าตัด / ทีมงาน (placeholder)</p>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-8 text-center text-gray-400 text-sm border-t pt-4">
+                <p>&copy; Lovely Care Animal Clinic by (Guichai)</p>
+            </footer>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize lucide icons
+        lucide.createIcons();
+
+        // Smooth scroll & prefill booking form when clicking package buttons
+        document.querySelectorAll('.book-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                // allow anchor default to change hash, but we perform smooth scroll and prefill
+                const pkg = this.dataset.package || '';
+                // Prefill hidden field and petType
+                const selectedPackageInput = document.getElementById('selectedPackage');
+                if (selectedPackageInput) selectedPackageInput.value = pkg;
+
+                const petTypeField = document.getElementById('petType');
+                if (petTypeField) {
+                    if (pkg === 'cat' || pkg === 'dog-small' || pkg === 'dog-large') {
+                        petTypeField.value = pkg;
+                    }
+                }
+
+                // Smooth scroll to booking section
+                const bookingSection = document.getElementById('booking');
+                if (bookingSection) {
+                    e.preventDefault(); // prevent instant jump
+                    const top = bookingSection.getBoundingClientRect().top + window.pageYOffset - 20;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                    // focus first input after a short delay (so it's visible)
+                    setTimeout(() => {
+                        const petName = document.getElementById('pet-name');
+                        if (petName) petName.focus();
+                        // show short notice of selected package
+                        const notice = document.getElementById('bookingNotice');
+                        if (notice) {
+                            notice.textContent = pkg ? `คุณเลือกแพ็กเกจ: ${pkg.replace('-', ' ')}` : '';
+                            notice.classList.remove('hidden');
+                        }
+                    }, 600);
+                }
+            });
+        });
+
+        // Example submit handler: prevents actual submission and shows confirmation text (for demo)
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('bookingForm');
+            const formData = new FormData(form);
+            // Build a quick summary (you can replace this with an actual POST)
+            const summary = [
+                `ชื่อสัตว์เลี้ยง: ${formData.get('petName') || '-'}`,
+                `ชื่อเจ้าของ: ${formData.get('ownerName') || '-'}`,
+                `เบอร์ติดต่อ: ${formData.get('contact') || '-'}`,
+                `ชนิดสัตว์เลี้ยง: ${formData.get('petType') || '-'}`,
+                `แพ็กเกจที่เลือก: ${formData.get('selectedPackage') || '-'}`,
+                `วันที่: ${formData.get('appointmentDate') || '-'}`,
+                `หมายเหตุ: ${formData.get('notes') || '-'}`
+            ].join('\n');
+
+            // For now, show a friendly notice below form
+            const notice = document.getElementById('bookingNotice');
+            if (notice) {
+                notice.textContent = 'ระบบจะแสดงข้อมูลดังนี้ (ตัวอย่าง): ' + summary;
+                notice.classList.remove('hidden');
+            }
+
+            // TODO: ส่งข้อมูลไปยังเซิร์ฟเวอร์ด้วย fetch หรือฟอร์มจริงตามที่ต้องการ
+            // fetch('/api/book', { method: 'POST', body: formData })...
+        }
+
+        // Simple placeholder for search suggestions (optional)
+        function showSuggestions() {
+            // This is just placeholder. Implement real suggestions if needed.
+            const input = document.getElementById('searchInput');
+            const box = document.getElementById('suggestions');
+            if (!input || !box) return;
+            if (input.value.trim().length > 0) {
+                box.classList.remove('hidden');
+                box.innerHTML = '<li class="px-3 py-2 text-sm">ตัวอย่าง: ทำหมัน</li>';
+            } else {
+                box.classList.add('hidden');
+            }
+        }
+    </script>
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+</body>
+
+</html>

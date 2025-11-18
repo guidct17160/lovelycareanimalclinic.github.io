@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Health Checker - เว็บตรวจสุขภาพสัตว์</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Mitr', sans-serif;
+            /* ลบ padding/margin ออกจาก body เพื่อให้ header ยืดเต็มจอ */
+            margin: 0;
+            padding: 0; 
+            background-color: #f9f9f9;
+        }
+
+        /* ---------- Header ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* ปรับ padding แนวตั้งและแนวนอน */
+            padding: 15px 50px; 
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* สำคัญ: ใช้ width: 100% (ซึ่งเป็นค่า Default ของ flex อยู่แล้ว แต่ใส่ไว้เพื่อความมั่นใจ) */
+            width: 100%; 
+            box-sizing: border-box; /* สำคัญ: รวม padding เข้าไปในความกว้าง 100% */
+        }
+
+        /* สำหรับหน้าจอเล็ก ให้ลด padding ของ header */
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 20px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .logo-contact {
+                gap: 20px;
+            }
+            ul.nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        .logo-contact {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .header img {
+            height: 60px; /* ลดขนาดโลโก้ลงเล็กน้อยเพื่อให้ดูสมดุล */
+            width: 60px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .red {  
+            color: red;
+        }
+
+        /* ---------- Navigation ---------- */
+        ul.nav {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        ul.nav li a {
+            display: block;
+            color: rgb(105, 102, 104);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ul.nav li a:hover {
+            background-color: #057614;
+            color: white;
+        }
+
+        /* ---------- Search Box ---------- */
+        form.example {
+            position: relative;
+        }
+
+        form.example input[type=text] {
+            padding: 8px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            width: 180px;
+        }
+
+        #suggestions {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background: #fff;
+            width: 200px;
+            border-radius: 12px;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            cursor: pointer;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        #suggestions li {
+            padding: 8px 15px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #suggestions li:hover {
+            background-color: #70e07e;
+            color: #fff;
+        }
+
+        /* ---------- Body Content Container (Centralized) ---------- */
+        /* ต้องปรับการจัดการ padding ของ body ใหม่ */
+        .content-container {
+            /* แทนที่ padding: 50px 50px ของ body-section เดิม */
+            padding: 40px 20px;
+            max-width: 1200px; /* จำกัดความกว้างเนื้อหาหลัก */
+            margin: 0 auto; /* จัดให้อยู่ตรงกลาง */
+        }
+        
+        /* สไตล์สำหรับส่วนฟอร์ม */
+        .app-form-container {
+            max-width: 800px; /* ใช้ max-width เดิม 4xl (ประมาณ 56rem หรือ 896px) */
+            margin: 0 auto;
+        }
+        
+        /* Custom styles for emphasis */
+        .result-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen"> 
+    <header class="header">
+        <div class="logo-contact">
+            <img src="C:\Users\guidt\Desktop\HTML CSS\Lovelycare\picture\LOGO.png" alt="Logo"> 
+            <div class="contact-info">
+                <i class="fa-solid fa-clock"></i> 09:30 - 19:00<br>
+                <i class="fa-solid fa-phone"></i> 065 223 9444<br>
+                <span class="red">หยุดวันอาทิตย์</span>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="home.html">หน้าแรก</a></li>
+            <li><a href="aboutme.html">เกี่ยวกับเรา</a></li>
+            <li><a href="contactme.html">ติดต่อเรา</a></li>
+            <li>
+                <form class="example" onsubmit="return searchFunction()">
+                    <input type="text" id="searchInput" placeholder="Search.." onkeyup="showSuggestions()">
+                    <ul id="suggestions"></ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+
+    <div class="content-container"> 
+        <div id="app" class="app-form-container bg-white shadow-xl rounded-2xl p-6 md:p-10 border-t-8 border-emerald-500">
+            <header class="text-center mb-8">
+                <h1 class="text-4xl font-extrabold text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 inline-block mr-2 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.172l3.243 3.243a1 1 0 01.07.127l1.092 3.64A1 1 0 0115 13.916V17a1 1 0 01-1 1H6a1 1 0 01-1-1v-3.084a1 1 0 01-.405-.824l1.092-3.64a1 1 0 01.07-.127L9 4.172V3a1 1 0 011-1zM5 13a1 1 0 100 2h10a1 1 0 100-2H5z" clip-rule="evenodd" />
+                    </svg>
+                    เครื่องมือตรวจสุขภาพสัตว์เลี้ยงเบื้องต้น
+                </h1>
+                <p class="text-gray-600 mt-2">โปรดตอบคำถามเพื่อรับคำแนะนำการดูแลสุขภาพสัตว์เลี้ยงของคุณ</p>
+            </header>
+
+            <form id="health-check-form" class="space-y-6">
+                <div>
+                    <label class="block text-lg font-semibold text-gray-700 mb-2">1. สัตว์เลี้ยงของคุณคือ?</label>
+                    <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6">
+                        <label class="flex items-center p-4 bg-emerald-50 rounded-xl cursor-pointer hover:bg-emerald-100 transition duration-200 shadow-md flex-1">
+                            <input type="radio" name="species" value="dog" class="form-radio h-5 w-5 text-emerald-600" required>
+                            <span class="ml-3 text-gray-800 font-medium">สุนัข (Dog) 🐶</span>
+                        </label>
+                        <label class="flex items-center p-4 bg-emerald-50 rounded-xl cursor-pointer hover:bg-emerald-100 transition duration-200 shadow-md flex-1">
+                            <input type="radio" name="species" value="cat" class="form-radio h-5 w-5 text-emerald-600" required>
+                            <span class="ml-3 text-gray-800 font-medium">แมว (Cat) 🐱</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="age" class="block text-lg font-semibold text-gray-700 mb-2">2. อายุโดยประมาณ (ปี):</label>
+                    <input type="number" id="age" name="age" min="0" max="30" placeholder="เช่น 2 ปี" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 shadow-sm" required>
+                </div>
+
+                <div class="space-y-6">
+                    <label class="block text-lg font-semibold text-gray-700 mb-3">3. อาการที่สังเกตเห็น (เลือกได้หลายข้อ):</label>
+
+                    <div class="p-4 bg-red-50 border border-red-200 rounded-xl shadow-sm">
+                        <h4 class="font-bold text-red-700 mb-2">🔴 อาการฉุกเฉิน (Urgent - รีบไปทันที)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center p-2 rounded-md hover:bg-red-100">
+                                <input type="checkbox" name="symptoms" value="lethargy" class="form-checkbox h-5 w-5 text-red-600 rounded-md">
+                                <span class="ml-3 text-gray-800">ซึมมาก, หมดสติ, ไม่ตอบสนอง (Lethargy)</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-red-100">
+                                <input type="checkbox" name="symptoms" value="difficulty_breathing" class="form-checkbox h-5 w-5 text-red-600 rounded-md">
+                                <span class="ml-3 text-gray-800">หายใจลำบาก, หอบถี่รุนแรง, เหงือกซีด</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-red-100">
+                                <input type="checkbox" name="symptoms" value="seizures" class="form-checkbox h-5 w-5 text-red-600 rounded-md">
+                                <span class="ml-3 text-gray-800">อาการชักเกร็ง (Seizures)</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-red-100">
+                                <input type="checkbox" name="symptoms" value="severe_pain" class="form-checkbox h-5 w-5 text-red-600 rounded-md">
+                                <span class="ml-3 text-gray-800">ส่งเสียงร้องเจ็บปวดรุนแรง/ช่องท้องบวมแข็ง</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-red-100">
+                                <input type="checkbox" name="symptoms" value="collapse" class="form-checkbox h-5 w-5 text-red-600 rounded-md">
+                                <span class="ml-3 text-gray-800">ล้มลง/หมดแรงกะทันหัน (Collapse)</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-red-100">
+                                <input type="checkbox" name="symptoms" value="uncontrolled_bleeding" class="form-checkbox h-5 w-5 text-red-600 rounded-md">
+                                <span class="ml-3 text-gray-800">เลือดออกไม่หยุด/อาเจียนเป็นเลือด</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-xl shadow-sm">
+                        <h4 class="font-bold text-yellow-700 mb-2">🟠 อาการเร่งด่วน (Quick Attention - ภายใน 24 ชม.)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="frequent_vomiting_diarrhea" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">อาเจียน/ท้องเสียถี่เกิน 3-4 ครั้ง (มีภาวะขาดน้ำ)</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="anorexia_24h" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">ไม่ยอมกินอาหาร/น้ำเกิน 24 ชั่วโมง</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="difficulty_urination" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">ปัสสาวะลำบาก/ปัสสาวะไม่ออก (ต้องระวังในแมวเพศผู้)</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="severe_lameness" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">เดินกะเผลกรุนแรง/ไม่ใช้ขาข้างหนึ่ง</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="eye_redness_discharge" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">ตาแดงจัด, ปวดตา, มีขี้ตา/น้ำตาผิดปกติ</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="skin_lump_sudden" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">พบก้อนเนื้อโตขึ้นอย่างรวดเร็ว/แผลติดเชื้อมีหนอง</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="coughing_persist" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">ไอติดต่อกันเป็นเวลานาน/ไอตอนกลางคืน</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-yellow-100">
+                                <input type="checkbox" name="symptoms" value="sudden_weight_loss" class="form-checkbox h-5 w-5 text-yellow-600 rounded-md">
+                                <span class="ml-3 text-gray-800">น้ำหนักลดลงรวดเร็วอย่างมีนัยสำคัญ</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl shadow-sm">
+                        <h4 class="font-bold text-blue-700 mb-2">🔵 อาการทั่วไป (Routine - นัดตรวจตามปกติ)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center p-2 rounded-md hover:bg-blue-100">
+                                <input type="checkbox" name="symptoms" value="mild_itching" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                                <span class="ml-3 text-gray-800">มีอาการคันเล็กน้อย/ขนร่วงเป็นหย่อม</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-blue-100">
+                                <input type="checkbox" name="symptoms" value="bad_breath" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                                <span class="ml-3 text-gray-800">มีกลิ่นปากแรง/หินปูนสะสม (Dental)</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-blue-100">
+                                <input type="checkbox" name="symptoms" value="mild_ear_scratching" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                                <span class="ml-3 text-gray-800">เกาหูบ่อย/มีขี้หูเล็กน้อย</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-blue-100">
+                                <input type="checkbox" name="symptoms" value="appetite_picky" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                                <span class="ml-3 text-gray-800">เลือกกิน/เบื่ออาหารแค่บางมื้อ</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-blue-100">
+                                <input type="checkbox" name="symptoms" value="mild_vomiting_single" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                                <span class="ml-3 text-gray-800">อาเจียนครั้งเดียวแล้วหยุด</span>
+                            </label>
+                            <label class="flex items-center p-2 rounded-md hover:bg-blue-100">
+                                <input type="checkbox" name="symptoms" value="behavior_change_mild" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+                                <span class="ml-3 text-gray-800">พฤติกรรมเปลี่ยนเล็กน้อย (เช่น ก้าวร้าวขึ้น)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="details" class="block text-lg font-semibold text-gray-700 mb-2">4. รายละเอียดเพิ่มเติม:</label>
+                    <textarea id="details" name="details" rows="3" placeholder="เช่น อาการเริ่มเมื่อ 2 ชั่วโมงที่แล้ว, เพิ่งเปลี่ยนอาหาร" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 shadow-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 text-white p-4 rounded-xl font-bold text-xl hover:bg-emerald-700 transition duration-300 shadow-lg hover:shadow-xl">
+                    วิเคราะห์และรับคำแนะนำเชิงลึก
+                </button>
+            </form>
+
+            <div id="result-area" class="mt-8 pt-6 border-t border-gray-200 hidden">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">ผลการวิเคราะห์เบื้องต้น</h2>
+                <div id="result-content" class="result-card p-6 rounded-xl shadow-inner bg-green-50">
+                    </div>
+                <div class="mt-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-md">
+                    <p class="font-bold">⚠️ ข้อสงวนสิทธิ์สำคัญ:</p>
+                    <p class="text-sm">เครื่องมือนี้เป็นเพียงการประเมินเบื้องต้นตามข้อมูลที่ให้มาเท่านั้น **ไม่สามารถใช้แทนการวินิจฉัยของสัตวแพทย์ได้** โปรดปฏิบัติตามคำแนะนำระดับความเร่งด่วนอย่างเคร่งครัดเพื่อความปลอดภัยของสัตว์เลี้ยงของคุณ</p>
+                </div>
+            </div>
+
+            <footer class="mt-10 text-center text-gray-400 text-sm border-t pt-4">
+                <p>&copy; Lovely Care Animal Clinic by (Guichai)</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('health-check-form');
+        const resultArea = document.getElementById('result-area');
+        const resultContent = document.getElementById('result-content');
+
+        // Define severity scores for symptoms
+        const SYMPTOM_SCORES = {
+            // Urgent (10 points each)
+            'lethargy': 10,
+            'difficulty_breathing': 10,
+            'seizures': 10,
+            'severe_pain': 10,
+            'collapse': 10,
+            'uncontrolled_bleeding': 10,
+            
+            // Quick Attention (5 points each)
+            'frequent_vomiting_diarrhea': 5,
+            'anorexia_24h': 5,
+            'difficulty_urination': 5,
+            'severe_lameness': 5,
+            'eye_redness_discharge': 5,
+            'skin_lump_sudden': 5,
+            'coughing_persist': 5,
+            'sudden_weight_loss': 5,
+
+            // Routine (1 point each)
+            'mild_itching': 1,
+            'bad_breath': 1,
+            'mild_ear_scratching': 1,
+            'appetite_picky': 1,
+            'mild_vomiting_single': 1,
+            'behavior_change_mild': 1,
+        };
+
+        const SEVERITY_LEVELS = {
+            CRITICAL: { title: '🚨 ภาวะฉุกเฉินระดับสูงสุด', action: 'รีบไปโรงพยาบาลฉุกเฉินทันที', color: 'bg-red-100 border-red-600 text-red-800' },
+            HIGH: { title: '⚠️ ต้องพบแพทย์ด่วนภายใน 24 ชั่วโมง', action: 'โทรติดต่อคลินิกเพื่อแจ้งอาการและนัดหมายทันที', color: 'bg-yellow-100 border-yellow-600 text-yellow-800' },
+            MODERATE: { title: '🔶 ควรนัดพบแพทย์เพื่อตรวจประเมิน', action: 'นัดตรวจสุขภาพตามความสะดวก แต่ไม่ควรปล่อยไว้นานเกิน 1 สัปดาห์', color: 'bg-orange-100 border-orange-600 text-orange-800' },
+            LOW: { title: '🟢 เฝ้าระวังและดูแลทั่วไป', action: 'สังเกตอาการต่อไป และปรึกษาแพทย์ในการตรวจสุขภาพประจำปี', color: 'bg-emerald-100 border-emerald-600 text-emerald-800' },
+            HEALTHY: { title: '✨ สุขภาพโดยรวมดี', action: 'คงการดูแลที่ดีไว้ และอย่าลืมการตรวจสุขภาพประจำปี', color: 'bg-green-100 border-green-600 text-green-800' }
+        };
+
+        function displayResult(level, diagnosisText, actionPlan, specificDDx, details) {
+            const levelInfo = SEVERITY_LEVELS[level];
+            
+            resultContent.innerHTML = `
+                <div class="p-6 rounded-xl border-l-4 border-b-2 ${levelInfo.color}">
+                    <h3 class="text-3xl font-extrabold mb-4">${levelInfo.title}</h3>
+                    
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold">${diagnosisText}</p>
+                        
+                        ${specificDDx ? `
+                            <div class="p-4 bg-white rounded-lg shadow-inner">
+                                <p class="font-bold text-xl text-red-700">🔍 ข้อวินิจฉัยที่ต้องระวังเป็นพิเศษ:</p>
+                                <p class="text-red-700">${specificDDx}</p>
+                            </div>
+                        ` : ''}
+
+                        <div class="p-4 bg-white rounded-lg shadow-inner border-t">
+                            <p class="font-bold text-xl text-gray-900">📝 แผนปฏิบัติการที่แนะนำ:</p>
+                            <ul class="list-disc list-inside ml-4 mt-2 font-medium">
+                                <li>${actionPlan}</li>
+                                <li>เตรียมข้อมูลสัตว์เลี้ยง (ประวัติการรักษา, วัคซีน) และแจ้งอาการทั้งหมดอย่างละเอียดเมื่อไปถึงคลินิก</li>
+                            </ul>
+                        </div>
+                        
+                        ${details ? `<p class="mt-4 border-t pt-2 text-sm italic text-gray-600"><strong>รายละเอียดเพิ่มเติมที่คุณแจ้ง:</strong> ${details}</p>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            resultArea.classList.remove('hidden');
+            resultArea.scrollIntoView({ behavior: 'smooth' });
+        }
+
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const species = document.querySelector('input[name="species"]:checked')?.value;
+            const age = parseInt(document.getElementById('age').value);
+            const selectedSymptoms = Array.from(document.querySelectorAll('input[name="symptoms"]:checked')).map(cb => cb.value);
+            const details = document.getElementById('details').value.trim();
+
+            if (!species) {
+                alert("กรุณาเลือกชนิดสัตว์เลี้ยง (สุนัข/แมว) ก่อนครับ");
+                return;
+            }
+
+            let totalScore = 0;
+            let specificDiagnosis = null;
+
+            selectedSymptoms.forEach(symptom => {
+                totalScore += SYMPTOM_SCORES[symptom] || 0;
+            });
+
+            // --- 1. CRITICAL, SPECIES-SPECIFIC DIAGNOSIS (Override Logic) ---
+
+            // A. Feline Urinary Obstruction (แมวฉุกเฉิน)
+            if (species === 'cat' && selectedSymptoms.includes('difficulty_urination')) {
+                // FO is fatal. If there's also lethargy/pain, it's Code Red.
+                let urgency_check = (selectedSymptoms.includes('lethargy') || selectedSymptoms.includes('severe_pain'));
+                
+                if (urgency_check) {
+                    specificDiagnosis = `
+                        **ภาวะอุดตันทางเดินปัสสาวะในแมว (Feline Urethral Obstruction)**
+                        อาการนี้เป็นภาวะฉุกเฉินที่อันตรายถึงชีวิต เนื่องจากแมวไม่สามารถขับของเสียออกจากร่างกายได้ ทำให้ค่าโพแทสเซียมสูงและไตวายเฉียบพลันได้
+                    `;
+                    return displayResult('CRITICAL', 'อาการเข้าข่ายภาวะอุดตันทางเดินปัสสาวะ (Urinary Blockage) ซึ่งเป็นอันตรายถึงชีวิต', SEVERITY_LEVELS.CRITICAL.action, specificDiagnosis, details);
+                }
+            }
+
+            // B. Severe Systemic Failure / Shock (สุนัข/แมวฉุกเฉินทั่วไป)
+            if (selectedSymptoms.includes('lethargy') && (selectedSymptoms.includes('collapse') || selectedSymptoms.includes('uncontrolled_bleeding'))) {
+                specificDiagnosis = `
+                    **ภาวะช็อก (Shock) หรือการเสียอวัยวะภายในรุนแรง**
+                    การซึมร่วมกับการล้มลงกะทันหันหรือเสียเลือด บ่งชี้ถึงภาวะที่ไม่เสถียรของร่างกาย เช่น ช็อก, ภาวะโลหิตจางรุนแรง, หรือปัญหาหัวใจ/ระบบประสาท
+                `;
+                return displayResult('CRITICAL', 'สัญญาณอันตรายถึงชีวิตที่บ่งชี้ภาวะช็อก หรือการล้มเหลวของระบบอวัยวะภายใน', SEVERITY_LEVELS.CRITICAL.action, specificDiagnosis, details);
+            }
+            
+            // --- 2. TIERED SEVERITY DIAGNOSIS (Scoring Logic) ---
+
+            let level;
+            let diagnosisText = 'จากการรวมอาการที่รายงานมา';
+            
+            if (totalScore >= 15) { // Multiple High-Risk symptoms (e.g., Difficulty Breathing + Seizures)
+                level = 'CRITICAL';
+                diagnosisText = 'สัตว์เลี้ยงมีอาการหลายอย่างที่มีความเสี่ยงสูงต่อชีวิต ซึ่งต้องได้รับการตรวจวินิจฉัยและรักษาอย่างทันท่วงที';
+            } else if (totalScore >= 8) { // One Urgent or multiple Quick Attention symptoms
+                level = 'HIGH';
+                
+                if (selectedSymptoms.includes('anorexia_24h') && species === 'cat') {
+                     specificDiagnosis = 'ภาวะตับไขมันเกาะ (Hepatic Lipidosis) เป็นไปได้สูงในแมวที่ไม่ยอมกินอาหารเกิน 24-48 ชั่วโมง ต้องได้รับการตรวจเลือดและให้สารน้ำอย่างเร่งด่วน';
+                } else if (age < 1 && species === 'dog' && selectedSymptoms.includes('frequent_vomiting_diarrhea')) {
+                     specificDiagnosis = 'ในลูกสุนัข มีความเสี่ยงสูงของโรคติดเชื้อรุนแรง เช่น **พาร์โวไวรัส** (Parvovirus) ต้องได้รับการแยกกักและตรวจวินิจฉัยทันที';
+                }
+                
+                if (specificDiagnosis) {
+                    diagnosisText = 'อาการบ่งชี้ถึงการเจ็บป่วยที่ต้องได้รับการดูแลอย่างใกล้ชิดและเร่งด่วนภายในไม่กี่ชั่วโมง';
+                } else {
+                    diagnosisText = 'อาการที่รายงานมามีความรุนแรงในระดับสูง และอาจนำไปสู่ภาวะขาดน้ำหรือติดเชื้อรุนแรงได้';
+                }
+
+            } else if (totalScore >= 3) { // Multiple routine or few Quick Attention symptoms
+                level = 'MODERATE';
+
+                if (selectedSymptoms.includes('coughing_persist') && age > 7 && species === 'dog') {
+                    specificDiagnosis = 'มีความเสี่ยงของปัญหาหัวใจ (โรคลิ้นหัวใจ) หรือโรคหลอดลมตีบ ซึ่งมักเกิดในสุนัขสูงวัย ควรเข้ารับการตรวจเอกซเรย์';
+                }
+                
+                diagnosisText = 'อาการนี้เป็นสัญญาณว่าสัตว์เลี้ยงมีความไม่สบายทางกายภาพที่ชัดเจน แนะนำให้เข้ารับการตรวจเพื่อหาสาเหตุ';
+
+            } else if (totalScore >= 1) { // Only routine symptoms
+                level = 'LOW';
+                diagnosisText = 'เป็นอาการที่ไม่เป็นอันตรายร้ายแรง แต่หากปล่อยไว้อาจพัฒนาเป็นปัญหาเรื้อรังได้';
+            } else {
+                level = 'HEALTHY';
+                diagnosisText = `สัตว์เลี้ยงของคุณ ${species === 'dog' ? 'สุนัข' : 'แมว'} อายุ ${age} ปี ดูเหมือนจะมีสุขภาพดี`;
+            }
+
+            // 3. Display Result
+            displayResult(level, diagnosisText, SEVERITY_LEVELS[level].action, specificDiagnosis, details);
+        });
+    </script>
+    <script>
+
+
+        function showSuggestions() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase();
+            const suggestionBox = document.getElementById('suggestions');
+            suggestionBox.innerHTML = "";
+
+            if (keyword === "") {
+                suggestionBox.style.display = "none";
+                return;
+            }
+
+            const data = [
+                { name: "เกี่ยวกับเรา", link: "aboutme.html" },
+                { name: "หน้าแรก", link: "home.html" },
+                { name: "ติดต่อเรา", link: "contactme.html" },
+                { name: "รับฝากน้องแมว", link: "takecare.html" },
+                { name: "ฉีดวัคซีน", link: "vaccine.html" },
+                { name: "ทำหมัน", link: "ster.html" },
+                { name: "ผ่าตัด", link: "surgery.html" },
+                { name: "ตรวจสุขภาพ", link: "pethealth.html" },
+                { name: "ขูดหินปูน", link: "scrape.html" }
+            ];
+
+            const result = data.filter(item => item.name.includes(keyword));
+
+            result.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.onclick = () => { window.location.href = item.link; };
+                suggestionBox.appendChild(li);
+            });
+
+            suggestionBox.style.display = "block";
+        }
+    </script>
+</body>
+</html>
